@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mail:
+    image: wchi3/ops635-as4:latest
+    hostname: ${HOSTNAME}
+    domainname: ${DOMAINNAME}
+    container_name: ${CONTAINER_NAME}
+    ports:
+    - "25:25"
+    - "143:143"
+    - "587:587"
+    - "993:993"
+    volumes:
+    - "maildata:/var/mail"
+    — "mailstate:/var/mail-state"
+    - "maillogs:/var/log/mail"
+    - "./config/:/tmp/ops635-as4/"
+    env_file:
+    - .env
+volumes:
+  maildata:
+    driver: local
+  mailstate:
+    driver: local
+  maillogs:
+    driver: local
